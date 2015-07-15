@@ -19,7 +19,7 @@ import java.util.*;
  *
  * @author Robert Bor
  */
-public abstract class State
+public abstract class State                 //存储的值有：depth,failure,emits
 {
 
     /**
@@ -57,7 +57,7 @@ public abstract class State
     public State(int depth)
     {
         this.depth = depth;
-        this.rootState = depth == 0 ? this : null;
+        this.rootState = depth == 0 ? this : null;      //如果深度为0，根状态指向自己，否则为null
     }
 
     /**
@@ -107,7 +107,7 @@ public abstract class State
      * 获取failure状态
      * @return
      */
-    public State failure()
+    public State failure()          //failure 转向的状态
     {
         return this.failure;
     }
@@ -126,7 +126,7 @@ public abstract class State
      * @param character 希望按此字符转移
      * @return 转移结果
      */
-    public abstract State nextState(Character character);
+    public abstract State nextState(Character character);       //自动机中实线
 
     /**
      * 转移到下一个状态，忽略根节点
@@ -140,17 +140,17 @@ public abstract class State
      * @param character
      * @return
      */
-    public abstract State addState(Character character);
+    public abstract State addState(Character character);        //构建goto时
 
     /**
      * 获取success状态
      * @return
      */
-    public abstract Collection<State> getStates();
+    public abstract Collection<State> getStates();      //Trie自动机中当前状态节点的可达子状态节点
 
     /**
      * 获取要转移到下一个状态的可能char
      * @return
      */
-    public abstract Collection<Character> getTransitions();
+    public abstract Collection<Character> getTransitions();     //当前状态节点的所有‘后边’
 }
